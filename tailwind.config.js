@@ -9,9 +9,9 @@ module.exports = {
     themes: [
       {
         lighttheme: {
-          "primary": "#ec5629",
-          "secondary": "#BCDDF1",
-          "accent": "#D99330",
+          "primary": "#29EC57",
+          "secondary": "#75E963",
+          "accent": "#4CD930",
           "neutral": "#FFF1F1",
           "base-100": "#F4F4F4",
           "base-200": "#EEEEEE",
@@ -21,12 +21,12 @@ module.exports = {
           "error": "#F87272",
         },
         darktheme: {
-          "primary": "#ec5629",
-          "secondary": "#1c3748",
-          "accent": "#D99330",
-          "neutral": "#110E0E",
-          "base-100": "#0c121f",
-          "base-200": "#070B12",
+          "primary": "#29EC57",
+          "secondary": "#1C4836",
+          "accent": "#4CD930",
+          "neutral": "#0F110E",
+          "base-100": "#0E1F0C",
+          "base-200": "#071207",
           "info": "#3ABFF8",
           "success": "#36D399",
           "warning": "#FBBD23",
