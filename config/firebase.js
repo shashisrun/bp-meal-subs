@@ -84,7 +84,8 @@ async function addDocument(database, data) {
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
         });
-        return response;
+        const resdata = await getDoc(response)
+        return resdata.data()
     } catch (error) {
         console.error(error);
         return false;

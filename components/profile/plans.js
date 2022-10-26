@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../../contexts/authContext";
-import { addNamedDocument, getDocument, getDocuments } from "../../config/firebase";
+import { addDocument, addNamedDocument, getDocument, getDocuments, updateDocument } from "../../config/firebase";
+import razorpayPayment from '../../utils/razorpayPayment'
 
 export default function Plans() {
     const [plans, setPlans] = React.useState([]);
@@ -9,10 +10,58 @@ export default function Plans() {
     const { user, setUser } = useAuth();
 
     React.useEffect(() => {
+        if (!plans.length)
         getDocuments('plans').then((data) => {
             setPlans(data);
         });
-    }, [])
+    }, [plans])
+
+    const createOrder = () => {
+        const data = {
+            ...selectedPlan,
+            isSuccessfull: false,
+            userId: user.uid,
+        }
+        addDocument('orders', data).then(async (res) => {
+            let order = await fetch('/createOrder', {
+                method: 'POST',
+                body: JSON.stringify(res)
+            })
+            order = order.json();
+            const options = {
+                key: process.env.NEXT_PUBLIC_RZP_ID, // Enter the Key ID generated from the Dashboard
+                name: "BodyPower Cafe",
+                currency: 'INR',
+                amount: res.price * 100,
+                order_id: order.id,
+                description: res.name,
+                handler: handler,
+                prefill: {
+                    name: user.name ? user.name : '',
+                    email: user.email ? user.email : '',
+                    contact: user.phoneNumber ? user.phoneNumber : '',
+                },
+            };
+
+            const handler = (response) => {
+                console.log(response)
+                
+                updateDocument('orders', {
+                    isSuccessfull: true,
+                    razorPayId: response.razorpay_payment_id,
+                    razorPayOrderId: response.razorpay_order_id
+                }, res.id)
+                updateDocument('users', {
+                    activePlan: {
+                        ...selectedPlan,
+                        orderId: res.id
+                    },
+                    mealCounts: res.duration
+                }, user.uid)
+            }
+            razorpayPayment(options)
+        })
+    }
 
     return (
         <>
@@ -22,7 +71,7 @@ export default function Plans() {
                     {plans.map((plan, index) => {
                         return(
                             <>
-                                <div tabIndex={0} className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box" key={index}>
+                                <div tabIndex={0} className={`collapse collapse-plus ${selectedPlan === plan ? 'collapse-open' : ''} border border-base-300 bg-base-100 rounded-box`} key={index} onClick={() => setSelectedPlan(plan)}>
                                     <div className="collapse-title text-xl font-medium">
                                         {plan.name}
                                     </div>
@@ -30,25 +79,10 @@ export default function Plans() {
                                         <p>{plan.description}</p>
                                         <div className="flex flex-row items-center flex-wrap">
                                             <button className="btn btn-primary mx-2 my-2"
-                                                onClick={() => {
-                                                    const chosenPlan = { plan: plan, planType: 'monthly', amount: plan.monthlyFee }
-                                                    setSelectedPlan(chosenPlan);
-                                                }}
+                                                onClick={createOrder}
                                             >
-                                                {`INR ${plan.monthlyFee} per month`}
+                                                {`INR ${plan.price} per ${plan.duration} days`}
                                             </button>
-                                            <spna className="text-xl font-bold">
-                                                or
-                                            </spna>
-                                            <button className="btn btn-primary mx-2 my-2"
-                                                onClick={() => {
-                                                    const chosenPlan = { plan: plan, planType: 'yearly', amount: plan.yearlyFee }
-                                                    setSelectedPlan(chosenPlan);
-                                                }}
-                                            >
-                                                {`INR ${plan.yearlyFee} per month`}
-                                            </button>
-
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +95,7 @@ export default function Plans() {
                 {error}
             </div>
             {}
-            <div className="my-2">
+            {/* <div className="my-2">
                 <button
                     className="btn btn-primary w-full"
                     onClick={async (event) => {
@@ -82,7 +116,7 @@ export default function Plans() {
                     }
                     }
                 >Next</button>
-            </div>
+            </div> */}
         </>
     )
 }
