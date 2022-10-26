@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { TbArmchair2 } from 'react-icons/tb'
-import { IoRepeatOutline } from 'react-icons/io5'
+import Link from 'next/link';
+import { IoRepeatOutline, IoNotifications } from 'react-icons/io5'
 
 export default function Header() {
     const [darkMode, setDarkMode] = React.useState(true);
@@ -59,19 +59,11 @@ export default function Header() {
         <header className="px-2 py-3 w-full sticky top-0 bg-base-200 flex-none h-18 z-50">
             <div className="flex flex-row">
                 <div className="w-2/12">
-                    <label htmlFor="choose-table-modal" className="btn bg-primary modal-button">
-                        <TbArmchair2 size={24} />
-                    </label>
-                    <input type="checkbox" id="choose-table-modal" className="modal-toggle"/>
-                    <div className="modal">
-                        <div className="modal-box">
-                            <h3 className="font-bold text-lg">Congratulations random Internet user!</h3>
-                            <p className="py-4">You&apos;ve been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-                            <div className="modal-action">
-                                <label htmlFor="choose-table-modal" className="btn">Yay!</label>
-                            </div>
+                    <Link href='notifications'>
+                        <div className='py-2 px-2'>
+                            <IoNotifications size={28} />
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className="w-8/12 px-2">
                     <input type="text" placeholder="Search" className="input rounded-full input-bordered w-full max-w-xs" value={search} onChange={(event) => setSearch(event.target.value)} onFocus={() => {

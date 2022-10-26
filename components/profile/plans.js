@@ -35,7 +35,9 @@ export default function Plans() {
                 amount: res.price * 100,
                 order_id: order.id,
                 description: res.name,
-                handler: handler,
+                handler: function (response) {
+                    handler(response);
+                },
                 prefill: {
                     name: user.name ? user.name : '',
                     email: user.email ? user.email : '',
@@ -45,19 +47,24 @@ export default function Plans() {
 
             const handler = (response) => {
                 console.log(response)
-                
-                updateDocument('orders', {
-                    isSuccessfull: true,
-                    razorPayId: response.razorpay_payment_id,
-                    razorPayOrderId: response.razorpay_order_id
-                }, res.id)
-                updateDocument('users', {
-                    activePlan: {
-                        ...selectedPlan,
-                        orderId: res.id
-                    },
-                    mealCounts: res.duration
-                }, user.uid)
+                if (response.razorpay_payment_id) {
+                    updateDocument('orders', {
+                        isSuccessfull: true,
+                        razorPayId: response.razorpay_payment_id,
+                        razorPayOrderId: response.razorpay_order_id ? response.razorpay_order_id : '',
+                        razorPaySignature: response.razorpay_signature ? response.razorpay_signature : ''
+                    }, res.id)
+                    updateDocument('users', {
+                        activePlan: {
+                            ...selectedPlan,
+                            orderId: res.id
+                        },
+                        mealCounts: res.duration
+                    }, user.uid).then(async () => {
+                        const profile = await getDocument('users', user.uid);
+                        setUser({ ...user, profile: profile });
+                    })
+                }
             }
             razorpayPayment(options)
         })
