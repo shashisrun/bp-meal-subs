@@ -11,6 +11,7 @@ export default function AskVegDays() {
     ];
     return (
         <>
+            <h2 className="my-2">Do you have any vegetarian days?, if yes select below or click next</h2>
             <div className="form-control">
                 {days.map((day, index) => {
                     return (

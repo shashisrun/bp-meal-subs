@@ -11,6 +11,7 @@ import Plans from '../components/profile/plans';
 import AskMealType from '../components/profile/askMealType';
 import AskVegDays from '../components/profile/askVegDays';
 import { addNamedDocument, getDocument } from "../config/firebase";
+import AskAge from '../components/profile/askAge';
 
 export default function CompleteProfile() {
     const { user, setUser } = useAuth();
@@ -35,15 +36,16 @@ export default function CompleteProfile() {
             const profileFields = Object.keys(user.profile)
             console.log(profileFields)
             if (!profileFields.includes('gender')) setShowComponent(() => <AskGender />)
+            else if (!profileFields.includes('age')) setShowComponent(() => <AskAge />)
             else if (!profileFields.includes('height')) setShowComponent(() => <AskHeight />)
             else if (!profileFields.includes('weight')) setShowComponent(() => <AskWeight />)
             else if (!profileFields.includes('bmi')) setShowComponent(() => <ShowBMI />)
             else if (!profileFields.includes('goal')) setShowComponent(() => <AskGoal />)
             else if (!profileFields.includes('physicalActivity')) setShowComponent(() => <AskPhysicalActivity />)
             else if (!profileFields.includes('workoutFrequency')) setShowComponent(() => <AskWorkoutFrequency />)
-            else if (!profileFields.includes('activePlan')) setShowComponent(() => <Plans />)
             else if (!profileFields.includes('mealType')) setShowComponent(() => <AskMealType />)
-            else if (!profileFields.includes('vegDays')) setShowComponent(() => <AskVegDays />)
+            else if (user.profile.mealType !== 'vegetarian' && !profileFields.includes('vegDays')) setShowComponent(() => <AskVegDays />)
+            else if (!profileFields.includes('activePlan')) setShowComponent(() => <Plans />)
             else {
                 completeProfile();
                 setShowComponent(() => {

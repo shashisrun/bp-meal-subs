@@ -9,12 +9,12 @@ module.exports = {
     themes: [
       {
         lighttheme: {
-          "primary": "#29EC57",
-          "secondary": "#75E963",
-          "accent": "#4CD930",
+          "primary": "#34be70",
+          "secondary": "#b8efd1",
+          "accent": "#e3292a",
           "neutral": "#FFF1F1",
-          "base-100": "#F4F4F4",
-          "base-200": "#EEEEEE",
+          "base-100": "#fdffff",
+          "base-200": "#f6f7fb",
           "info": "#3ABFF8",
           "success": "#36D399",
           "warning": "#FBBD23",
