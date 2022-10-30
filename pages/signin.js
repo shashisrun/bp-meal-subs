@@ -38,13 +38,19 @@ export default function Signin() {
                     lastLogin: serverTimestamp(),
                     createdAt: serverTimestamp()
                 }, reponse.user.uid)
-                setUser({ ...user, profile: responseNew });
+                if (responseNew) {
+                    const profile = await getDocument('users', user.uid);
+                    setUser({ ...user, profile: profile });
+                }
             } else {
                 const responseNew = await addNamedDocument('users', {
                     ...getUser,
                     lastLogin: serverTimestamp()
                 }, reponse.user.uid)
-                setUser({ ...user, profile: responseNew });
+                if (responseNew) {
+                    const profile = await getDocument('users', user.uid);
+                    setUser({ ...user, profile: profile });
+                }
             }
         } catch (error) {
             setError(error.message);
