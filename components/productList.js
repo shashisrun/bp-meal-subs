@@ -23,7 +23,7 @@ export default function ProductList({ meals }) {
 
     return (
         <div className='my-5'>
-            <CategoryCarousel onClick={(data) => {
+            {/* <CategoryCarousel onClick={(data) => {
                 if (data) {
                     const mealsCopy = [ ...meals ];
                     const localFilteredMeals = mealsCopy.filter(meal => {
@@ -37,7 +37,7 @@ export default function ProductList({ meals }) {
                     setTitle('All Meals');
                     setFilteredMeals([])
                 }
-             }} />
+             }} /> */}
             <h2 className='text-3xl font-bold'>
                 {title}
             </h2>

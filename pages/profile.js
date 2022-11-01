@@ -3,15 +3,62 @@ import { useRouter } from 'next/router';
 import { auth } from "../config/firebase";
 import { useAuth } from '../contexts/authContext';
 import ImageViewer from '../components/imageViewer';
+import Link from 'next/link';
 export default function Profile() {
     const [locaUserData, setLocalUserData] = React.useState({});
     const { user, setUser } = useAuth();
     const router = useRouter()
     React.useEffect(() => {
         if (user && user.profile) {
-            setLocalUserData({...user.profile})
+            setLocalUserData({ ...user.profile })
         }
     }, [user])
+
+    let links;
+
+    if (locaUserData.isRegistrationComplete) {
+        links = [
+            {
+                link: '/profile/edit',
+                title: 'Edit Profile',
+                icon: '',
+            },
+            {
+                link: '/profile/subscription',
+                title: 'Manage Subscription',
+                icon: '',
+            },
+            {
+                link: '/profile/deliverySlot',
+                title: 'Manage Delivery Slot',
+                icon: '',
+            },
+            {
+                link: '/notifications',
+                title: 'Notifications',
+                icon: '',
+            },
+            {
+                link: '/profile/paymentHistory',
+                title: 'Payment History',
+                icon: '',
+            }
+        ]
+    } else {
+        links = [
+            {
+                link: '/notifications',
+                title: 'Notifications',
+                icon: '',
+            },
+            {
+                link: '/profile/paymentHistory',
+                title: 'Payment History',
+                icon: '',
+            }
+        ]
+    }
+
     return (
         <>
             <div className='my-2 flex flex-row items-center'>
@@ -26,8 +73,23 @@ export default function Profile() {
                         {locaUserData.phone}
                     </h2>
                 </div>
-                
+
             </div>
+            <div className="w-2/3 mx-auto rounded h-1 bg-secondary my-1"></div>
+            <ul className='flex flex-col my-5'>
+                {links.map((link, index) => {
+                    return (
+                        <li className='w-full h-12 my-2' key={index}>
+                            <Link href={link.link}>
+                                <div className='w-full h-full text-xl btn text-left'>
+                                    {link.title}
+                                </div>
+                            </Link>
+                        </li>
+                    )
+                })}
+            </ul>
+            <div className="w-2/3 mx-auto rounded h-1 bg-secondary my-1"></div>
             <button
                 className='btn btn-primary w-full'
                 onClick={() => {
