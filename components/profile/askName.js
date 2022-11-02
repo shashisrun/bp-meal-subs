@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addNamedDocument, getDocument } from "../../config/firebase";
+import Title from "../title";
 
 export default function AskName() {
     const [name, setName] = React.useState('');
@@ -10,6 +11,9 @@ export default function AskName() {
     return (
         <>
             <div className="my-2">
+                <Title>
+                    Your name?
+                </Title>
                 <input type="text" placeholder="Enter your name" className="input w-full bg-secondary"
                     value={name}
                     onChange={(event) => setName(event.target.value)}

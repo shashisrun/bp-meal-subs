@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addNamedDocument, getDocument } from "../../config/firebase";
+import Title from "../title";
 
 export default function AskVegDays() {
     const [vegDays, setVegDays] = React.useState([]);
@@ -11,7 +12,9 @@ export default function AskVegDays() {
     ];
     return (
         <>
-            <h2 className="my-2">Do you have any vegetarian days?, if yes select below or click next</h2>
+            <Title>
+                Do you have any vegetarian days?, if yes select below or click next
+            </Title>
             <div className="form-control">
                 {days.map((day, index) => {
                     return (

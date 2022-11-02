@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addNamedDocument, getDocument } from "../../config/firebase";
+import Title from "../title";
 
 export default function AskWorkoutFrequency() {
     const [workoutFrequency, setWorkoutFrequency] = React.useState(0);
@@ -10,7 +11,9 @@ export default function AskWorkoutFrequency() {
     return (
         <>
             <div className="my-2">
-                How many times do you train in a gym per week
+                <Title>
+                    How many times do you train in a gym per week?
+                </Title>
                 <div className="my-3">
                     <input type="range" min="0" max="7" value={workoutFrequency} className="range" step="1" onChange={(event) => setWorkoutFrequency(parseInt(event.target.value))} />
                     <div className="w-full flex justify-between text-xs px-2">

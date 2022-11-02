@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addNamedDocument, getDocument } from "../../config/firebase";
 import { FaWeight, FaBicycle, FaDumbbell } from "react-icons/fa";
+import Title from "../title";
 
 export default function AskGoal() {
     const [goal, setGoal] = React.useState('');
@@ -11,7 +12,9 @@ export default function AskGoal() {
     return (
         <>
             <div className="my-2">
-                Your Goal is to
+                <Title>
+                    Your Goal is to
+                </Title>
                 <div className="my-1">
                     <label className="btn btn-default py-1 bg-secondary hover:bg-primary w-full" htmlFor="dropfat">
                         <FaWeight size={24} />

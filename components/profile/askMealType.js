@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addNamedDocument, getDocument } from "../../config/firebase";
 import { FaAppleAlt, FaFish, FaEgg } from "react-icons/fa";
+import Title from "../title";
 
 export default function AskMealType() {
     const [mealType, setMealType] = React.useState('');
@@ -11,7 +12,9 @@ export default function AskMealType() {
     return (
         <>
             <div className="my-2">
-                You are
+                <Title>
+                    You are
+                </Title>
                 <div className="my-1">
                     <label className="btn btn-default py-1 bg-secondary hover:bg-primary w-full" htmlFor="vegetarian">
                         <FaAppleAlt size={24} />

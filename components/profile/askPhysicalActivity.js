@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addNamedDocument, getDocument } from "../../config/firebase";
+import Title from "../title";
 
 export default function AskPhysicalActivity() {
     const [physicalActivity, setPhysicalActivity] = React.useState('');
@@ -10,7 +11,9 @@ export default function AskPhysicalActivity() {
     return (
         <>
             <div className="my-2">
-                Your Physical Activity (Steps per Day)
+                <Title>
+                    Your Physical Activity (Steps per Day)
+                </Title>
                 <div className="my-1">
                     <label className="btn btn-default py-1 bg-secondary hover:bg-primary w-full" htmlFor="low">{`Low (< 2500)`}</label>
                     <input type="radio" name="physicalActivity" className="radio radio-accent" hidden id="low" onClick={(event) => setPhysicalActivity('Low (< 2500)')} />

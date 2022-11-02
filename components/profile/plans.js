@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addDocument, addNamedDocument, getDocument, getDocuments, updateDocument } from "../../config/firebase";
 import razorpayPayment from '../../utils/razorpayPayment'
+import Title from "../title";
 
 export default function Plans() {
     const [plans, setPlans] = React.useState([]);
@@ -73,7 +74,9 @@ export default function Plans() {
     return (
         <>
             <div className="my-2">
-                Select a Plan
+                <Title>
+                    Select a Plan
+                </Title>
                 <div className="my-3">
                     {plans.map((plan, index) => {
                         return(

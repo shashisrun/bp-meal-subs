@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addNamedDocument, getDocument } from "../../config/firebase";
+import Title from "../title";
 
 export default function AskWeight() {
     const [weight, setWeight] = React.useState('');
@@ -10,6 +11,9 @@ export default function AskWeight() {
     return (
         <>
             <div className="my-2">
+                <Title>
+                    You weigh?
+                </Title>
                 <input type="text" placeholder="Enter your weight (kg)" className="input w-full bg-secondary"
                     value={weight}
                     onChange={(event) => setWeight(event.target.value)}

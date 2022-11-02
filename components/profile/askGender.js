@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addNamedDocument, getDocument } from "../../config/firebase";
 import { IoMale, IoFemale, IoMaleFemale } from "react-icons/io5";
+import Title from "../title";
 
 export default function AskGender() {
     const [gender, setGender] = React.useState('');
@@ -11,7 +12,9 @@ export default function AskGender() {
     return (
         <>
             <div className="my-2">
-                You are
+                <Title>
+                    You are?
+                </Title>
                 <div className="my-1">
                     <label className="btn btn-default py-1 bg-secondary hover:bg-primary w-full" htmlFor="male">
                         <IoMale size={32} />

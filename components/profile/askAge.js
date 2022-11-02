@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../../contexts/authContext";
 import { addNamedDocument, getDocument } from "../../config/firebase";
+import Title from "../title";
 
 export default function AskAge() {
     const [age, setAge] = React.useState('');
@@ -10,6 +11,9 @@ export default function AskAge() {
     return (
         <>
             <div className="my-2">
+                <Title>
+                    Your age is?
+                </Title>
                 <input type="text" placeholder="Enter your age" className="input w-full bg-secondary"
                     value={age}
                     onChange={(event) => setAge(event.target.value)}

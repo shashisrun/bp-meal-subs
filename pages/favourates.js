@@ -1,10 +1,9 @@
 import React from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
 import { where, documentId } from '../config/firebase';
 import { useAuth } from '../contexts/authContext';
 import { getDocuments } from '../config/firebase';
 import ProductList from '../components/productList'
+import NoData from '../components/noData';
 
 export default function Favourates() {
     const [meals, setMeals] = React.useState([]);
@@ -27,8 +26,17 @@ export default function Favourates() {
         }
     }, [user])
     return (
-        <div>
-            <ProductList meals={meals} />
-        </div>
+        <>
+            {
+                meals.length ?
+                    <div>
+                        <ProductList meals={meals} />
+                    </div>
+                    :
+                    <>
+                        <NoData message={'You have liked any meals yet!'} />
+                    </>
+            }
+        </>
     )
 }

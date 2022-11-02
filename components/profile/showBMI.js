@@ -14,6 +14,7 @@ export default function ShowBMI() {
                 <h2 className="text-xl">
                     {bmi < 18.5 ? "You're in the underweight range" : null}
                     {bmi >= 18.5 && bmi < 25 ? "You're in the healthy weight range" : null}
+                    {bmi >= 25 && bmi <= 30 ? "You're in the over weight range" : null}
                     {bmi > 30 ? "You're in the over weight range" : null}
                 </h2>
             </div>

@@ -12,10 +12,23 @@ import AskMealType from '../components/profile/askMealType';
 import AskVegDays from '../components/profile/askVegDays';
 import { addNamedDocument, getDocument } from "../config/firebase";
 import AskAge from '../components/profile/askAge';
+import Title from '../components/title';
+import ImageViewer from '../components/imageViewer';
+import successfull from '../assets/successfulll.png';
+import { useRouter } from "next/router";
 
 export default function CompleteProfile() {
     const { user, setUser } = useAuth();
-    const [showComponet, setShowComponent] = React.useState(() => <>Loading...</>)
+    const [showComponet, setShowComponent] = React.useState(() => {
+        return (
+            <>
+                <div className="w-full h-full">
+                    <progress class="progress w-2/3"></progress>
+                </div>
+            </>
+        )
+    })
+    const router = useRouter();
 
 
     React.useEffect(() => {
@@ -51,7 +64,17 @@ export default function CompleteProfile() {
                 setShowComponent(() => {
                     return (
                         <>
-                            Your profile registration is complete
+                            <ImageViewer src={successfull} width={1080} height={1080} classname='w-full' />
+                            <Title alignment={'center'}>
+                                Your profile registration is complete
+                            </Title>
+                            <button
+                                className='btn btn-primary w-full'
+                                onClick={(event) => {
+                                    event.preventDefault()
+                                    router.push('/')
+                                }}
+                            >Go to home</button>
                         </>
                     )
                 })

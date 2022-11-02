@@ -1,7 +1,9 @@
+import NoData from "../components/noData";
+
 export default function Notifications() {
     return (
         <>
-            No notifications available
+            <NoData message="Sorry no new notification available!" />
         </>
     )
 }
