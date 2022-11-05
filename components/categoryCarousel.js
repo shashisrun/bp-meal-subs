@@ -41,7 +41,7 @@ export default function CategoryCarousel({ onClick }) {
                     </div>
                 )
             })}
-            <div className='my-1 mx-2 sticky right-0'>
+            {/* <div className='my-1 mx-2 sticky right-0'>
                 <label htmlFor="filterModal" className="btn btn-default py-1 bg-secondary hover:bg-primary flex flex-row">
                     <IoFilter size={24} />
                 </label>
@@ -55,7 +55,7 @@ export default function CategoryCarousel({ onClick }) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
