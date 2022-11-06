@@ -59,13 +59,15 @@ export default function ProductCard({ product }) {
                 </div>
                 <figure className="w-full rounded-box">
                     <div className="w-full carousel rounded-box">
-                        {product.thumbnails.map((thumbnail, key) => {
-                            return (
-                                <div className="carousel-item w-full" key={key}>
-                                    <ImageViewer src={thumbnail} height={500} width={500} className='w-full rounded-box' />
-                                </div>
-                            )
-                        })}
+                        {product.thumbnails ? <>
+                            {product.thumbnails.map((thumbnail, key) => {
+                                return (
+                                    <div className="carousel-item w-full" key={key}>
+                                        <ImageViewer src={thumbnail} height={500} width={500} className='w-full rounded-box' />
+                                    </div>
+                                )
+                            })}
+                        </> : <></>}
                     </div>
                 </figure>
                 <div className="px-2 my-3">

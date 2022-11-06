@@ -3,6 +3,7 @@ import { getDocuments, where } from '../config/firebase';
 import ProductCard from './productCard';
 import CategoryCarousel from './categoryCarousel';
 import { useAuth } from '../contexts/authContext';
+import Title from './title';
 
 export default function ProductList({ meals }) {
     const [filteredMeals, setFilteredMeals] = React.useState([]);
@@ -37,10 +38,12 @@ export default function ProductList({ meals }) {
                     setTitle('All Meals');
                     setFilteredMeals([])
                 }
-             }} />
-            <h2 className='text-3xl font-bold'>
+            }} />
+            
+            <Title>
                 {title}
-            </h2>
+            </Title>
+            
             {filteredMeals.length ?
                 <>
                     {filteredMeals.map((meal, key) => {

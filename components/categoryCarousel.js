@@ -22,18 +22,7 @@ export default function CategoryCarousel({ onClick }) {
             {cuisines.map((cuisine, key) => {
                 return (
                     <div className='my-1 mx-2' key={key}>
-                        <button className="btn btn-default py-1 bg-secondary hover:bg-primary flex flex-row"
-                            onClick={() => onClick(cuisine)}
-                        >
-                            <span className='mx-1'>{cuisine.name}</span>
-                        </button>
-                    </div>
-                )
-            })}
-            {cuisines.map((cuisine, key) => {
-                return (
-                    <div className='my-1 mx-2' key={key}>
-                        <button className="btn btn-default py-1 bg-secondary hover:bg-primary flex flex-row"
+                        <button className="btn btn-default py-1 bg-secondary hover:bg-primary flex flex-row btn-wide"
                             onClick={() => onClick(cuisine)}
                         >
                             <span className='mx-1'>{cuisine.name}</span>
