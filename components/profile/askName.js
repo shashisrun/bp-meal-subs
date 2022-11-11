@@ -14,7 +14,7 @@ export default function AskName() {
                 <Title>
                     Your name?
                 </Title>
-                <input type="text" placeholder="Enter your name" className="input w-full bg-secondary"
+                <input type="text" placeholder="Enter your name" className="input w-full bg-base-100 text-primary"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
@@ -24,7 +24,7 @@ export default function AskName() {
             </div>
             <div className="my-2">
                 <button
-                    className="btn btn-primary w-full"
+                    className="btn btn-secondary w-full"
                     onClick={async (event) => {
                         event.preventDefault();
                             if (name === '' && name.length < 3) {
