@@ -75,7 +75,7 @@ export default function Signin() {
                         <ImageViewer src={signin3} width={1288} height={1364} classname='w-full' />
                     </div>
                 </div>
-                <div className='bg-primary w-full h-full rounded-lg pt-5 text-white'>
+                <div className='bg-primary w-full h-full rounded-lg pt-5 text-white -mt-10 z-10 absolute shadow-xl'>
                     <div className='px-2'>
                         <h1 className='text-5xl font-bold font-italic'>
                             Start your Nutritionally Balanced meal plan!
