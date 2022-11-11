@@ -4,17 +4,17 @@ import ImageViewer from "./imageViewer";
 export default function Offers() {
     const offers = [
         {
-            src: 'offers/starter_package.jpeg',
+            src: 'offers/starter_package.png',
             alt: 'Starter Package',
             link: '/completeProfile'
         },
         {
-            src: 'offers/monthly_package.jpeg',
+            src: 'offers/monthly_package.png',
             alt: 'Monthly Package',
             link: '/completeProfile'
         },
         {
-            src: 'offers/transformation_package.jpeg',
+            src: 'offers/transformation_package.png',
             alt: 'Tranformation Package',
             link: '/completeProfile'
         }
