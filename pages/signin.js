@@ -7,6 +7,7 @@ import signin1 from '../assets/signin_1.png'
 import signin2 from '../assets/signin_2.png'
 import signin3 from '../assets/signin_3.png'
 import ImageViewer from '../components/imageViewer';
+import logo from '../assets/white_logo.png'
 
 export default function Signin() {
     const [phone, setPhone] = React.useState('');
@@ -75,9 +76,12 @@ export default function Signin() {
                         <ImageViewer src={signin3} width={1288} height={1364} classname='w-full' />
                     </div>
                 </div>
-                <div className='bg-primary w-full h-full rounded-lg pt-5 text-white -mt-10 z-10 absolute shadow-xl'>
-                    <div className='px-2'>
-                        <h1 className='text-5xl font-bold font-italic'>
+                <div className='bg-primary h-full rounded-lg pt-5 text-white -mt-20 -ml-2 z-10 absolute shadow-xl'>
+                    <div className='px-20 py-2 '>
+                        <ImageViewer src={logo} width={2551} height={296} className="w-full" />
+                    </div>
+                    <div className='px-2 ml-5 pl-5 border-l-2 py-5'>
+                        <h1 className='text-5xl font-bold'>
                             Start your Nutritionally Balanced meal plan!
                         </h1>
                     </div>
