@@ -21,7 +21,7 @@ export default function DeliverySlot() {
     return (
         <>
             <Title>
-                Your Delivery Slot
+                Your Available Delivery Slot
             </Title>
             <div className="container mx-auto">
                 {slots.map((localSlot, index) => {
