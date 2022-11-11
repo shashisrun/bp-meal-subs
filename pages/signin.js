@@ -76,7 +76,7 @@ export default function Signin() {
                         <ImageViewer src={signin3} width={1288} height={1364} classname='w-full' />
                     </div>
                 </div>
-                <div className='bg-primary h-full rounded-lg pt-5 text-white -mt-20 -ml-2 z-10 absolute shadow-xl'>
+                <div className='bg-primary h-full rounded-lg pt-5 text-white -mt-20 -ml-2 z-10 absolute pb-20'>
                     <div className='px-20 py-2 '>
                         <ImageViewer src={logo} width={2551} height={296} className="w-full" />
                     </div>
