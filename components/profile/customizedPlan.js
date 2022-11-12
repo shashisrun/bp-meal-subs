@@ -1,0 +1,86 @@
+import React from "react";
+import Title from "../title";
+
+export default function CustomizedPlan({plan, onClick}) {
+    const [duration, setDuration] = React.useState(0)
+    const [protein, setProtein] = React.useState(0)
+    const [addonProtein, setAddonProtein] = React.useState(0)
+    const [addonCarb, setAddonCarb] = React.useState(0)
+    const [mealsPerDay, setMealsPerDay] = React.useState(1)
+
+    console.log(plan);
+    return (
+        <>
+            <Title>
+                Create your own plan!
+            </Title>
+            <div className="my-3">
+                <div className='my-2'>
+                    <select className="select w-full select-primary" onChange={(event) => setDuration(plan.durations.filter((duration) => event.target.value == duration.days)[0])}>
+                        <option disabled selected>Pick your duration</option>
+                        {plan.durations.map((duration, index) => <option value={duration.days} key={index}>{duration.title}</option>)}
+                    </select>
+                </div>
+                <div className='my-2'>
+                    <select className="select w-full select-primary" onChange={(event) => setMealsPerDay(event.target.value)}>
+                        {plan.mealsPerDay.map((meal, index) => <option value={meal} key={index}>{meal} Meal per day</option>)}
+                    </select>
+                </div>
+                <div className='my-2'>
+                    <select className="select w-full select-primary" onChange={(event) => setProtein(plan.proteins.filter((protein) => event.target.value == protein.type)[0])}>
+                        <option disabled selected>Pick your protein</option>
+                        {plan.proteins.map((protein, index) => <option value={protein.type} key={index}>{protein.type} (₹{protein.mealPrice}/Meal)</option>)}
+                    </select>
+                </div>
+                {protein ? <>
+                    <div className='my-2'>
+                        <div className="form-control w-full">
+                            <label className="label">
+                                <span className="label-text font-bold">Add on {protein.addonPortion} Protein Portion ({protein.type})</span>
+                                <span className="label-text">₹{protein.addonPrice}/{protein.addonPortion}</span>
+                            </label>
+                            <input type="number" placeholder="Enter the multiple of 50g eg. 2 = 100g" className="input input-bordered input-primary w-full" onChange={(event) => setAddonProtein(event.target.value)} min={0} />
+                            <label className="label">
+                                <span className="label-text font-bold">Addon Total: ₹{protein.addonPrice * addonProtein}</span>
+                            </label>
+                        </div>
+                    </div>
+                </> : <></>}
+                {plan.carbs ? <>
+                    <div className='my-2'>
+                        <div className="form-control w-full">
+                            <label className="label">
+                                <span className="label-text font-bold">Add on {plan.carbs.addonPortion} Carbs Portion</span>
+                                <span className="label-text">{`₹${plan.carbs.addonPrice}/${plan.carbs.addonPortion}`}</span>
+                            </label>
+                            <input type="number" placeholder="Enter the multiple of 50g eg. 2 = 100g" className="input input-bordered input-primary w-full" min={0} onChange={(event) => setAddonCarb(event.target.value)} />
+                            <label className="label">
+                                <span className="label-text font-bold">Addon Total: ₹{plan.carbs.addonPrice * addonCarb}</span>
+                            </label>
+                        </div>
+                    </div>
+                </> : <></>}
+                {protein ? <>
+                    <div className='my-2'>
+                        <Title>
+                            {`Your Total is ₹${duration.days * mealsPerDay * (protein.mealPrice + (protein.addonPrice * addonProtein) + (plan.carbs.addonPrice * addonCarb)) }`}
+                        </Title>
+                    </div>
+                    <div className="my-2">
+                        <button className="btn btn-primary w-full" onClick={() => {
+                            onClick({
+                                name: plan.name,
+                                duration: duration,
+                                mealsPerDay: mealsPerDay,
+                                protein: protein,
+                                addonCarb: addonProtein,
+                                addonProtein: addonProtein,
+                                price: duration.days * mealsPerDay * (protein.mealPrice + (protein.addonPrice * addonProtein) + (plan.carbs.addonPrice * addonCarb))
+                            })
+                        }}>Customize and Buy Plan</button>
+                    </div>
+                </> : <></>}
+            </div>
+        </>
+    )
+}

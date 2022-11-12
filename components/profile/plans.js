@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/authContext";
 import { addDocument, addNamedDocument, getDocument, getDocuments, updateDocument } from "../../config/firebase";
 import razorpayPayment from '../../utils/razorpayPayment'
 import Title from "../title";
+import CustomizedPlan from "./customizedPlan";
 
 export default function Plans() {
     const [plans, setPlans] = React.useState([]);
@@ -17,11 +18,20 @@ export default function Plans() {
         });
     }, [plans])
 
-    const createOrder = () => {
-        const data = {
-            ...selectedPlan,
-            isSuccessfull: false,
-            userId: user.uid,
+    const createOrder = (customizedPlan) => {
+        let data;
+        if (customizedPlan) {
+            data = {
+                ...customizedPlan,
+                isSuccessfull: false,
+                userId: user.uid,
+            }
+        } else {
+            data = {
+                ...selectedPlan,
+                isSuccessfull: false,
+                userId: user.uid,
+            }
         }
         addDocument('orders', data).then(async (res) => {
             let order = await fetch('/createOrder', {
@@ -48,7 +58,11 @@ export default function Plans() {
 
             const handler = (response) => {
                 console.log(response)
+
                 if (response.razorpay_payment_id) {
+                    alert(res.id)
+                    console.log('res')
+                    console.log(res)
                     updateDocument('orders', {
                         isSuccessfull: true,
                         razorPayId: response.razorpay_payment_id,
@@ -56,7 +70,10 @@ export default function Plans() {
                         razorPaySignature: response.razorpay_signature ? response.razorpay_signature : ''
                     }, res.id)
                     updateDocument('users', {
-                        activePlan: {
+                        activePlan: customizedPlan ? {
+                            ...customizedPlan,
+                            orderId: res.id
+                        } : {
                             ...selectedPlan,
                             orderId: res.id
                         },
@@ -86,14 +103,18 @@ export default function Plans() {
                                         {plan.name}
                                     </div>
                                     <div className="collapse-content">
-                                        <p>{plan.description}</p>
-                                        <div className="flex flex-row items-center flex-wrap">
-                                            <button className="btn btn-primary mx-2 my-2"
-                                                onClick={createOrder}
-                                            >
-                                                {`INR ${plan.price} per ${plan.duration} days`}
-                                            </button>
-                                        </div>
+                                        {plan.id === 'customizedPlan' ? <>
+                                            <CustomizedPlan plan={plan} onClick={createOrder} />
+                                        </> : <>
+                                            <p>{plan.description}</p>
+                                            <div className="flex flex-row items-center flex-wrap">
+                                                <button className="btn btn-primary mx-2 my-2"
+                                                    onClick={createOrder}
+                                                >
+                                                    {`INR ${plan.price} per ${plan.duration} days`}
+                                                </button>
+                                            </div>
+                                        </>}
                                     </div>
                                 </div>
                             </>
