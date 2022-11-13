@@ -28,7 +28,7 @@ export default function Footer() {
     ]
 
     React.useEffect(() => {
-        if (window.innerWidth < 400) {
+        if (window.innerHeight < 400) {
             setStick(false)
         } else {
             setStick(true)
@@ -36,7 +36,7 @@ export default function Footer() {
     }, [])
     
     window.addEventListener('resize', () => {
-        if (window.innerWidth < 400) {
+        if (window.innerHeight < 400) {
             setStick(false)
         } else {
             setStick(true)
