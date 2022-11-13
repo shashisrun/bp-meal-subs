@@ -25,23 +25,26 @@ export default function Footer() {
         },
     ]
     return (
-        <footer className='sticky bottom-0 w-full bg-primary rounded-t-3xl flex-none h-30 z-50'>
-            <nav className='text-center'>
-                <ul className='px-2 py-1 flex flex-row'>
-                    {links.map((link, key) => {
-                        return (
-                            <li key={key} className={`w-1/3 ${router.pathname === link.url ? 'text-secondary font-bold' : 'text-primary-content'}`}>
-                                <Link href={link.url}>
-                                    <a className='grid justify-items-center px-2 py-3 '>
-                                        {router.pathname === link.url ? link.activeicon : link.icon}
-                                        <h2>{link.title}</h2>
-                                    </a>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul> 
-            </nav>
-        </footer>
+        <>
+            <div className='h-20'></div>
+            <footer className='fixed bottom-0 w-full bg-primary rounded-t-3xl flex-none h-30 z-50'>
+                <nav className='text-center'>
+                    <ul className='px-2 py-1 flex flex-row'>
+                        {links.map((link, key) => {
+                            return (
+                                <li key={key} className={`w-1/3 ${router.pathname === link.url ? 'text-secondary font-bold' : 'text-primary-content'}`}>
+                                    <Link href={link.url}>
+                                        <a className='grid justify-items-center px-2 py-3 '>
+                                            {router.pathname === link.url ? link.activeicon : link.icon}
+                                            <h2>{link.title}</h2>
+                                        </a>
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul> 
+                </nav>
+            </footer>
+        </>
     )
 }

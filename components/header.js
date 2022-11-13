@@ -67,7 +67,9 @@ export default function Header() {
                     onBlur={() => {
                     }}
                 /> */}
-                    <ImageViewer src={logo} width={2551} height={296} className="w-full" />
+                    <Link href={'/'}>
+                        <ImageViewer src={logo} width={2551} height={296} className="w-full" />
+                    </Link>
                 </div>
                 <div className="w-2/12">
                 </div>
