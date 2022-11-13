@@ -8,6 +8,8 @@ export default function CustomizedPlan({plan, onClick}) {
     const [addonCarb, setAddonCarb] = React.useState(0)
     const [mealsPerDay, setMealsPerDay] = React.useState(1)
 
+    const addons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
     console.log(plan);
     return (
         <>
@@ -34,30 +36,18 @@ export default function CustomizedPlan({plan, onClick}) {
                 </div>
                 {protein ? <>
                     <div className='my-2'>
-                        <div className="form-control w-full">
-                            <label className="label">
-                                <span className="label-text font-bold">Add on {protein.addonPortion} Protein Portion ({protein.type})</span>
-                                <span className="label-text">₹{protein.addonPrice}/{protein.addonPortion}</span>
-                            </label>
-                            <input type="number" placeholder="Enter the multiple of 50g eg. 2 = 100g" className="input input-bordered input-primary w-full" onChange={(event) => setAddonProtein(event.target.value)} min={0} />
-                            <label className="label">
-                                <span className="label-text font-bold">Addon Total: ₹{protein.addonPrice * addonProtein}</span>
-                            </label>
-                        </div>
+                        <select className="select w-full select-primary" onChange={(event) => setAddonProtein(event.target.value)}>
+                            <option disabled selected>Add on Protein Portion ({protein.type})</option>
+                            {addons.map((count, index) => <option value={count} key={index}>{protein.type} - {count * protein.addonPortion}g (₹{protein.addonPrice * count}/Meal)</option>)}
+                        </select>
                     </div>
                 </> : <></>}
                 {plan.carbs ? <>
                     <div className='my-2'>
-                        <div className="form-control w-full">
-                            <label className="label">
-                                <span className="label-text font-bold">Add on {plan.carbs.addonPortion} Carbs Portion</span>
-                                <span className="label-text">{`₹${plan.carbs.addonPrice}/${plan.carbs.addonPortion}`}</span>
-                            </label>
-                            <input type="number" placeholder="Enter the multiple of 50g eg. 2 = 100g" className="input input-bordered input-primary w-full" min={0} onChange={(event) => setAddonCarb(event.target.value)} />
-                            <label className="label">
-                                <span className="label-text font-bold">Addon Total: ₹{plan.carbs.addonPrice * addonCarb}</span>
-                            </label>
-                        </div>
+                        <select className="select w-full select-primary" onChange={(event) => setAddonCarb(event.target.value)}>
+                            <option disabled selected>Add on Carbs Portion</option>
+                            {addons.map((count, index) => <option value={count} key={index}>{count * plan.carbs.addonPortion}g (₹{plan.carbs.addonPrice * count}/Meal)</option>)}
+                        </select>
                     </div>
                 </> : <></>}
                 {protein ? <>
