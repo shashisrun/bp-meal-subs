@@ -5,7 +5,7 @@
     "scope": "/",
     "start_url": "/",
     "name": "BodyPower Meal Subscriptions",
-    "short_name": "BMS",
+    "short_name": "BP Meal Subs",
     "description": "Get your nutritionally balanced meals, direct to your doorstep.",
     "icons": [
         {
@@ -28,5 +28,6 @@
             "sizes": "512x512",
             "type": "image/png"
         }
-    ]
+    ],
+    "version": 1 
 }
