@@ -106,7 +106,7 @@ export default function Signin() {
                                             />
                                         </div>
                                         <div className="my-1">
-                                            {error}
+                                            {/* {error} */}
                                         </div>
                                         <div className="my-2">
                                             <button
@@ -132,7 +132,7 @@ export default function Signin() {
                                             />
                                         </div>
                                         <div className="my-1">
-                                            {error}
+                                            {/* {error} */}
                                         </div>
                                         <div className="my-2">
                                             <button

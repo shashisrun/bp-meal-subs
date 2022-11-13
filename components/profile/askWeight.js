@@ -12,7 +12,7 @@ export default function AskWeight() {
         <>
             <div className="my-2">
                 <Title>
-                    You weigh?
+                    Your weight?
                 </Title>
                 <input type="text" placeholder="Enter your weight (kg)" className="input w-full bg-secondary"
                     value={weight}

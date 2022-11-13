@@ -37,7 +37,7 @@ export default function CustomizedPlan({plan, onClick}) {
                 {protein ? <>
                     <div className='my-2'>
                         <select className="select w-full select-primary" onChange={(event) => setAddonProtein(event.target.value)}>
-                            <option disabled selected>Add on Protein Portion ({protein.type})</option>
+                            <option value={0} selected>Add on Protein Portion ({protein.type})</option>
                             {addons.map((count, index) => <option value={count} key={index}>{protein.type} - {count * protein.addonPortion}g (₹{protein.addonPrice * count}/Meal)</option>)}
                         </select>
                     </div>
@@ -45,7 +45,7 @@ export default function CustomizedPlan({plan, onClick}) {
                 {plan.carbs ? <>
                     <div className='my-2'>
                         <select className="select w-full select-primary" onChange={(event) => setAddonCarb(event.target.value)}>
-                            <option disabled selected>Add on Carbs Portion</option>
+                            <option value={0} selected>Add on Carbs Portion</option>
                             {addons.map((count, index) => <option value={count} key={index}>{count * plan.carbs.addonPortion}g (₹{plan.carbs.addonPrice * count}/Meal)</option>)}
                         </select>
                     </div>

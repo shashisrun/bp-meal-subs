@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, addDoc, setDoc, doc, getDoc, getDocs, serverTimestamp, onSnapshot, CACHE_SIZE_UNLIMITED, enableIndexedDbPersistence, where, query, documentId } from "firebase/firestore";
+import { getFirestore, collection, addDoc, setDoc, doc, getDoc, getDocs, serverTimestamp, onSnapshot, CACHE_SIZE_UNLIMITED, enableIndexedDbPersistence, where, query, documentId, deleteField } from "firebase/firestore";
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes, deleteObject } from "firebase/storage";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
@@ -232,5 +232,6 @@ export {
     onMessage,
     serverTimestamp,
     where,
-    documentId
+    documentId,
+    deleteField
 };

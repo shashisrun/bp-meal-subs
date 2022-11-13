@@ -6,7 +6,7 @@ export default function ShowBMI() {
     const bmi = user.profile.weight / ((user.profile.height / 100) ** 2)
     return (
         <>
-            <div className={`flex flex-col items-center ${bmi > 18.5 || bmi < 25 ? 'text-green-500' : 'text-red-500' }`}>
+            <div className={`flex flex-col items-center ${bmi < 18.5 ? "text-yellow-500" : null} ${bmi >= 18.5 && bmi < 25 ? "text-green-500" : null} ${bmi >= 25 && bmi <= 30 ? "text-yellow-500" : null} ${bmi > 30 ? "text-red-500" : null}`}>
                 <IoFitness size={300} />
                 <h2 className="text-2xl font-bold">
                     Your BMI is {bmi.toFixed(2)}!
