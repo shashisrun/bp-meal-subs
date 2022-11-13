@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import React from 'react'
 import { IoHomeOutline, IoHome, IoHeartOutline, IoCartOutline, IoReaderOutline, IoPersonCircleOutline, IoHeart, IoCart, IoReader, IoPersonCircle } from 'react-icons/io5'
 
 export default function Footer() {
+    const [stick, setStick] = React.useState(true)
     const router = useRouter()
     const links = [
         {
@@ -24,10 +26,26 @@ export default function Footer() {
             activeicon: <IoPersonCircle size={28} />
         },
     ]
+
+    React.useEffect(() => {
+        if (window.innerWidth < 400) {
+            setStick(false)
+        } else {
+            setStick(true)
+        }
+    }, [])
+    
+    window.addEventListener('resize', () => {
+        if (window.innerWidth < 400) {
+            setStick(false)
+        } else {
+            setStick(true)
+        }
+    })
     return (
         <>
             <div className='h-20'></div>
-            <footer className='fixed bottom-0 w-full bg-primary rounded-t-3xl flex-none h-30 z-50'>
+            <footer className={`${stick ? 'fixed bottom-0' : ''} w-full bg-primary rounded-t-3xl flex-none h-30 z-50`}>
                 <nav className='text-center'>
                     <ul className='px-2 py-1 flex flex-row'>
                         {links.map((link, key) => {
